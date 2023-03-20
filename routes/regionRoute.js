@@ -9,6 +9,7 @@ router.post('/create-region', RegionsController.PostCreateRegion);
 router.get('/edit-region/:regionId', RegionsController.GetEditRegion);
 router.post('/edit-region', RegionsController.PostEditRegion);
 
-router.get('/delete-region/:regionId', RegionsController.PostDeleteRegion);
+router.get('/delete-region/:regionId', RegionsController.GetDeleteRegion);
+router.post('/delete-region', RegionsController.PostDeleteRegion);
 
 module.exports = router;

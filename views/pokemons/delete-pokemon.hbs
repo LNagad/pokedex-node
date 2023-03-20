@@ -1,0 +1,21 @@
+<div class="col-lg-6 offset-lg-3">
+  <div class="card shadow-sm p-3 mb-5  rounded">
+    <div class="card-header ">
+      <p class="text-center mb-0 fw-bold">Are you sure you want to delete 
+        <span class="text-warning">{{pokemon.name}}</span> ?
+      </p>
+    </div>
+    <div class="card-body">
+      <form method="post" action="/delete-pokemon">
+        
+        <input type="hidden" value="{{pokemon.id}}" name="Id">
+
+        <div class="d-flex justify-content-between">  
+          <a href="/pokemons" class="btn btn-secondary float-end">Cancel</a>
+          <button type="submit" class="btn btn-danger float-end">Delete</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

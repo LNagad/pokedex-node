@@ -5,16 +5,19 @@ const { engine } = require('express-handlebars');
 const sequelize = require('./util/pokeDb');
 const relations = require('./models/relations');
 
-
 const ErrorController = require('./controllers/ErrorController');
 const RegionsRoute = require('./routes/regionRoute');
 const PokemonTypesRoute = require('./routes/pokemonTypeRoute');
 const HomeRoute = require('./routes/homeRoute');
 const PokemonsRoute = require('./routes/pokemonsRoute');
-
+const Swal = require('sweetalert2');
 const CompareHelper = require('./util/Helpers/compareHelper');
 
 const app = express();
+
+/**
+ * Todo: Confirmacion al eliminar
+ */
 
 app.engine(
   'hbs',
