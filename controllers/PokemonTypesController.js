@@ -8,7 +8,8 @@ exports.GetPokemonTypes = (req, res, next) => {
     res.status(200).render('pokemonTypes/pokemonType', {
       pageTitle: 'Pokemon types',
       types: types,
-      typesActive: true
+      typesActive: true,
+      hasTypes: types > 0
     });
 
   }).catch(err => {
@@ -43,7 +44,7 @@ exports.GetEditType = (req, res, next) => {
   const typeId = req.params.typeId;
   const edit = req.query.edit;
 
-  if (edit !== 'true' || !edit) {
+  if (edit !== 'true' || !edit || !typeId) {
     return res.redirect('/pokemonTypes');
   }
 
@@ -78,8 +79,20 @@ exports.PostEditType  = (req, res, next) => {
   }); 
 };
 
-exports.PostDeleteType = (req, res, next) => {
+exports.GetDeleteType = (req, res, next) => {
   const typeId = req.params.typeId;
+
+  PokType.findOne({where: {id: typeId}}).then(result => {
+    res.status(200).render('pokemonTypes/delete-type', {
+      type: result.dataValues
+    });
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+exports.PostDeleteType = (req, res, next) => {
+  const typeId = req.body.Id;
 
   PokType.destroy({where: {id: typeId}}).then(result => {
     res.status(302).redirect('/pokemonTypes');

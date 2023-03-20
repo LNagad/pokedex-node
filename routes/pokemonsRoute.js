@@ -11,6 +11,7 @@ router.post('/edit-pokemon', PokemonsController.PostEditPokemon);
 
 router.post('/find-pokemon', PokemonsController.PostFindPokemon);
 
-router.get('/delete-pokemon/:pokemonId', PokemonsController.PostDeletePokemon);
+router.get('/delete-pokemon/:pokemonId', PokemonsController.GetDeletePokemon);
+router.post('/delete-pokemon', PokemonsController.PostDeletePokemon);
 
 module.exports = router;

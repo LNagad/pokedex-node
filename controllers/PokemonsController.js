@@ -82,7 +82,7 @@ exports.PostCreatePokemon = (req, res, next) => {
   const pokemonType = req.body.PokemonType;
   const Region = req.body.Region;
 
-  if (!pokemonName && imageUrl && pokemonType) {
+  if (!pokemonName && !imageUrl && !pokemonType && !Region && !pokemonType) {
     return res.redirect('/pokemons');
   }
 
@@ -153,8 +153,20 @@ exports.PostEditPokemon = (req, res, next) => {
     });
 };
 
-exports.PostDeletePokemon = (req, res, next) => {
+exports.GetDeletePokemon = (req, res, next) => {
   const pokemonId = req.params.pokemonId;
+
+  Pokemons.findOne({where: {id: pokemonId}}).then(result => {
+    res.status(200).render('pokemons/delete-pokemon', {
+      pokemon: result.dataValues
+    });
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+exports.PostDeletePokemon = (req, res, next) => {
+  const pokemonId = req.body.Id;
 
   Pokemons.destroy({ where: { id: pokemonId } })
     .then((result) => {

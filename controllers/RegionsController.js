@@ -8,7 +8,8 @@ exports.GetRegions = (req, res, next) => {
     res.status(200).render('regions/region', {
       pageTitle: 'Regions',
       regions: regions,
-      regionsActive: true
+      regionsActive: true,
+      hasRegions: regions > 0
     });
 
   }).catch(err => {
@@ -43,7 +44,7 @@ exports.GetEditRegion = (req, res, next) => {
   const regionId = req.params.regionId;
   const edit = req.query.edit;
 
-  if (edit !== 'true' || !edit) {
+  if (edit !== 'true' || !edit || !regionId) {
     return res.redirect('/regions');
   }
 
@@ -78,8 +79,20 @@ exports.PostEditRegion = (req, res, next) => {
   }); 
 };
 
-exports.PostDeleteRegion = (req, res, next) => {
+exports.GetDeleteRegion = (req, res, next) => {
   const regionId = req.params.regionId;
+
+  Regions.findOne({where: {id: regionId}}).then(result => {
+    res.status(200).render('regions/delete-region', {
+      region: result.dataValues
+    });
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+exports.PostDeleteRegion = (req, res, next) => {
+  const regionId = req.body.Id;
 
   Regions.destroy({where: {id: regionId}}).then(result => {
     res.status(302).redirect('/regions');

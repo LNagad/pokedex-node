@@ -19,7 +19,9 @@
                     <small class="type">Type: <span>{{pokemon.pokemonType}}</span></small>
                     <div class="mt-2">
                         <a class="btn btn-outline-primary" href="/edit-pokemon/{{pokemon.id}}?edit=true">Edit</a>
-                        <a class="btn btn-outline-danger" href="/delete-pokemon/{{pokemon.id}}">Delete
+                        <a id="delete-pokemon" 
+                        class="btn btn-outline-danger" 
+                        href="/delete-pokemon/{{pokemon.id}}">Delete
                         </a>
                     </div>
                 </div>
@@ -31,3 +33,4 @@
         {{/if}}
     </div>
 </div>
+

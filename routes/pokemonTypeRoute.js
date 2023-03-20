@@ -9,6 +9,7 @@ router.post('/create-type', PokTypeController.PostCreateType);
 router.get('/edit-type/:typeId', PokTypeController.GetEditType);
 router.post('/edit-type', PokTypeController.PostEditType);
 
-router.get('/delete-type/:typeId', PokTypeController.PostDeleteType);
+router.get('/delete-type/:typeId', PokTypeController.GetDeleteType);
+router.post('/delete-type', PokTypeController.PostDeleteType);
 
 module.exports = router;
