@@ -1,0 +1,43 @@
+<div class="col-lg-6 offset-lg-3">
+  <div class="card shadow-sm p-3 mb-5  rounded">
+    <div class="card-header ">
+      <p class="text-center mb-0 fw-bold"
+      >
+      {{#if editMode}}
+        Editing <span class="text-warning">{{type.name}}</span> 
+      {{else}}
+        Create new type
+      {{/if}}
+      </p>
+    </div>
+    <div class="card-body">
+      <form 
+        method="post" 
+        action="{{#if editMode}}/edit-type{{else}}/create-type{{/if}}"
+      >
+        <div class="mb-3">
+          <label for="Name" class="form-label">Pokemon type</label>
+          <input type="text"  
+          class="form-control" 
+          id="Name" 
+          name="Name" 
+          placeholder="Fire"
+          value="{{#if editMode}}{{type.name}}{{/if}}">
+        </div>
+        {{#if editMode}} 
+          <input type="hidden"
+          name="typeId"
+          value="{{#if editMode}}{{type.id}}{{/if}}">
+        {{/if}}
+        
+        <button type="submit" class="btn btn-primary float-end">
+          {{#if editMode}}
+            Update
+          {{else}}
+            Save
+          {{/if}}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

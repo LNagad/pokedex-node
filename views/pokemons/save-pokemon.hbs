@@ -1,0 +1,86 @@
+<div class="col-lg-6 offset-lg-3">
+  <div class="card shadow-sm p-3 mb-5  rounded">
+    <div class="card-header ">
+      <p class="text-center mb-0 fw-bold"
+      >
+      {{#if editMode}}
+        Editing <span class="text-warning">{{pokemon.name}}</span> 
+      {{else}}
+        Create new pokemon
+      {{/if}}
+      </p>
+    </div>
+    <div class="card-body">
+      <form 
+        method="post" 
+        action="{{#if editMode}}/edit-pokemon{{else}}/create-pokemon{{/if}}"
+      >
+        <div class="mb-3">
+          <label for="Name" class="form-label">Pokemon</label>
+          <input type="text"  
+          class="form-control" 
+          id="Name" 
+          name="Name" 
+          placeholder="Gyarados"
+          value="{{#if editMode}}{{pokemon.name}}{{/if}}">
+        </div>
+
+        <div class="mb-3">
+          <label for="ImageUrl" class="form-label">Pokemon image</label>
+          <input type="text"  
+          class="form-control" 
+          id="ImageUrl" 
+          name="ImageUrl" 
+          placeholder="Image link"
+          value="{{#if editMode}}{{pokemon.imageUrl}}{{/if}}">
+        </div>
+
+         <div class="mb-3">
+          <label for="PokemonType" class="form-label">Pokemon type</label>
+          <select name="PokemonType" class="form-select" id="PokemonType">
+            <option value="">Select a pokemon type</option>
+            {{#each pokeType as  |pType| }}
+
+              {{#if (compareEqual pType.id ../pokemon.pokemonTypeId)}}
+                <option selected value="{{pType.id}}">{{pType.name}}</option>
+              {{else}}
+                <option value="{{pType.id}}">{{pType.name}}</option>
+              {{/if}}
+
+            {{/each}}
+          </select>
+        </div>
+
+         <div class="mb-3">
+          <label for="Region" class="form-label">Region</label>
+          <select name="Region" class="form-select" id="Region">
+            <option value="">Select a region</option>
+            {{#each regions as  |region| }}
+
+              {{#if (compareEqual region.id ../pokemon.regionId)}}
+                <option selected value="{{region.id}}">{{region.name}}</option>
+              {{else}}
+                <option value="{{region.id}}">{{region.name}}</option>
+              {{/if}}
+
+            {{/each}}
+          </select>
+        </div>
+
+        {{#if editMode}} 
+          <input type="hidden"
+          name="PokemonId"
+          value="{{#if editMode}}{{pokemon.id}}{{/if}}">
+        {{/if}}
+        
+        <button type="submit" class="btn btn-primary float-end">
+          {{#if editMode}}
+            Update
+          {{else}}
+            Save
+          {{/if}}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

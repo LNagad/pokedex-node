@@ -1,0 +1,43 @@
+<div class="col-lg-6 offset-lg-3">
+  <div class="card shadow-sm p-3 mb-5  rounded">
+    <div class="card-header ">
+      <p class="text-center mb-0 fw-bold"
+      >
+      {{#if editMode}}
+        Editing <span class="text-warning">{{region.name}}</span> 
+      {{else}}
+        Create new region
+      {{/if}}
+      </p>
+    </div>
+    <div class="card-body">
+      <form 
+        method="post" 
+        action="{{#if editMode}}/edit-region{{else}}/create-region{{/if}}"
+      >
+        <div class="mb-3">
+          <label for="Name" class="form-label">Region name</label>
+          <input type="text"  
+          class="form-control" 
+          id="Name" 
+          name="Name" 
+          placeholder="Alola"
+          value="{{#if editMode}}{{region.name}}{{/if}}">
+        </div>
+        {{#if editMode}} 
+          <input type="hidden"
+          name="regionId"
+          value="{{#if editMode}}{{region.id}}{{/if}}">
+        {{/if}}
+        
+        <button type="submit" class="btn btn-primary float-end">
+          {{#if editMode}}
+            Update
+          {{else}}
+            Save
+          {{/if}}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
